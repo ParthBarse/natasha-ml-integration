@@ -52,7 +52,12 @@ def predict():
         new_url = data['url']
         x = vectorizer.transform([new_url])
         y_predict = logit.predict(x)
-        result = {'prediction': y_predict[0]}
+        # result = {'prediction': y_predict[0]}
+        if y_predict[0] == "benign":
+            prediction = 0
+        else:
+            prediction = 1
+        result = {'prediction': prediction}
         return jsonify(result), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
